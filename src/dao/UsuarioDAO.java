@@ -20,7 +20,7 @@ public class UsuarioDAO extends GenericDAOImpl<Usuario, UUID>{
     }
 
     public String autenticar(UUID id, String senha) throws ExceptionAutenticacaoInvalida{
-        Usuario usuario = bancoDeUsuarios.get(senha);
+        Usuario usuario = bancoDeUsuarios.get(id);
 
         if(usuario == null && !usuario.getSenha().equals(senha)){
             throw new ExceptionAutenticacaoInvalida("Usuário inexistente ou senha incorreta!");

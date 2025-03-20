@@ -3,18 +3,25 @@ package model;
 import java.util.UUID;
 
 public class Usuario extends AbstractModel<UUID>{
-    private String nome;
+    private String login, senha;
 
-    public Usuario(String senha, String nome){
-        super(senha);
-        this.setNome(nome);
+    public Usuario(String login, String senha){
+        this.setLogin(login);
+        this.setSenha(senha);
     }
 
-    public String getNome(){
-        return this.nome;
+    public String getLogin(){
+        return this.login;
     }
-    private void setNome(String nome){
-        this.nome = nome;
+    private void setLogin(String login){
+        this.login = login;
+    }
+
+    public String getSenha(){
+        return this.senha;
+    }
+    private void setSenha(String senha){
+        this.senha = senha;
     }
 
    

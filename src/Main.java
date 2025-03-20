@@ -1,23 +1,21 @@
 import java.util.UUID;
 
-import dao.GenericDAOImpl;
 import dao.UsuarioDAO;
 import exception.ExceptionAutenticacaoInvalida;
 import model.Usuario;
 
 public class Main{
     public static void main(String[] args) {
-        Usuario usuario01 = new Usuario("123", "Liz");
-        Usuario usuario02 = new Usuario("123h", "Mel");
+        Usuario usuario01 = new Usuario("Liz", "123");
+        Usuario usuario02 = new Usuario("Mel", "123h");
 
-        GenericDAOImpl gn01 = new GenericDAOImpl<>(UUID.class);
-        UsuarioDAO user01 = new UsuarioDAO(UUID.class);
+        UsuarioDAO userDao = new UsuarioDAO(UUID.class);
 
-        UUID id01 = (UUID) gn01.salvar(usuario01);
-        UUID id02 = (UUID) gn01.salvar(usuario02);
+        userDao.salvar(usuario01);
+        userDao.salvar(usuario02);
 
         try {
-            System.out.println(user01.autenticar(id01, "123"));
+            System.out.println(userDao.autenticar("Mel", "123h"));
         } catch (ExceptionAutenticacaoInvalida e) {
             System.out.println("Erro: " + e);
         }

@@ -16,15 +16,15 @@ public class UsuarioDAO extends GenericDAOImpl<Usuario, UUID>{
     }
 
     public List<Usuario> buscarOrdenadosPorNome(){
-        return buscarTodos().stream().sorted(Comparator.comparing(Usuario::getNome)).collect(Collectors.toList());
+        return buscarTodos().stream().sorted(Comparator.comparing(Usuario::getLogin)).collect(Collectors.toList());
     }
 
-    public String autenticar(UUID id, String senha) throws ExceptionAutenticacaoInvalida{
-        Usuario usuario = bancoDeUsuarios.get(id);
-
-        if(usuario == null && !usuario.getSenha().equals(senha)){
-            throw new ExceptionAutenticacaoInvalida("Usuário inexistente ou senha incorreta!");
+    public String autenticar(String login, String senha) throws ExceptionAutenticacaoInvalida{
+        for(Usuario usuario : buscarTodos()){
+            if(usuario.getLogin().equals(login) && usuario.getSenha().equals(senha)){
+                return "Usuário autenticado";
+            }
         }
-        return "Usuário autenticado";
+        throw new ExceptionAutenticacaoInvalida("Usuário inexistente ou senha incorreta!");
     }
 }
